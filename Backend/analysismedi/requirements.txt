@@ -1,0 +1,4 @@
+streamlit
+pytesseract
+pillow
+google-generativeai

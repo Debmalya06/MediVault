@@ -1,0 +1,201 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Medical Reports - MediVault</title>
+    <link rel="stylesheet" href="report_styles.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+</head>
+<body>
+    <!-- Header/Navigation Bar -->
+    <header class="main-header">
+        <div class="container">
+            <nav class="main-nav">
+                <ul class="nav-links">
+                    <li><a href="index.html"><i class="fas fa-home"></i> Home</a></li>
+                    <li class="active"><a href="reports.html"><i class="fas fa-file-medical"></i> Reports</a></li>
+                    <li><a href="appointment.html"><i class="fas fa-calendar-check"></i> Appointment</a></li>
+                </ul>
+                <div class="user-profile">
+                    <div class="user-dropdown">
+                        <button class="dropdown-btn">
+                            <i class="fas fa-user-circle"></i> <span id="username">User</span> <i class="fas fa-chevron-down"></i>
+                        </button>
+                        <div class="dropdown-content">
+                            <a href="#"><i class="fas fa-user"></i> Profile</a>
+                            <a href="#"><i class="fas fa-cog"></i> Settings</a>
+                            <a href="#" id="logoutBtn"><i class="fas fa-sign-out-alt"></i> Logout</a>
+                        </div>
+                    </div>
+                </div>
+            </nav>
+        </div>
+    </header>
+
+    <!-- Main Content -->
+    <main>
+        <div class="container">
+            <div class="page-header">
+                <h1>Medical Reports</h1>
+                <p>View, manage, and analyze your medical reports</p>
+            </div>
+
+            <!-- Reports Dashboard -->
+            <div class="reports-dashboard">
+                <div class="dashboard-header">
+                    <div class="search-filter">
+                        <input type="text" placeholder="Search reports..." class="search-input">
+                        <select class="filter-select">
+                            <option value="all">All Reports</option>
+                            <option value="xray">X-Ray</option>
+                            <option value="blood">Blood Test</option>
+                            <option value="mri">MRI</option>
+                            <option value="ct">CT Scan</option>
+                            <option value="other">Other</option>
+                        </select>
+                    </div>
+                    <button class="btn primary-btn upload-btn" id="uploadReportBtn">
+                        <i class="fas fa-plus"></i> Upload New Report
+                    </button>
+                </div>
+
+                <!-- Reports Table -->
+                <div class="reports-table-container">
+                    <table class="reports-table">
+                        <thead>
+                            <tr>
+                                <th>Report Name</th>
+                                <th>Type</th>
+                                <th>Date</th>
+                                <th>Doctor</th>
+                                <th>Actions</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <!-- Report rows will be populated by JavaScript -->
+                        </tbody>
+                    </table>
+                </div>
+
+                <!-- Pagination -->
+                <div class="pagination">
+                    <button class="pagination-btn" disabled><i class="fas fa-chevron-left"></i></button>
+                    <button class="pagination-btn active">1</button>
+                    <button class="pagination-btn">2</button>
+                    <button class="pagination-btn">3</button>
+                    <button class="pagination-btn"><i class="fas fa-chevron-right"></i></button>
+                </div>
+            </div>
+
+            <!-- Analysis Summary Section -->
+            <div class="analysis-summary">
+                <h2>Report Analysis Summary</h2>
+                <div class="summary-cards">
+                    <div class="summary-card">
+                        <div class="summary-icon">
+                            <i class="fas fa-file-medical"></i>
+                        </div>
+                        <div class="summary-details">
+                            <h3>Total Reports</h3>
+                            <p class="summary-count">12</p>
+                        </div>
+                    </div>
+                    <div class="summary-card">
+                        <div class="summary-icon">
+                            <i class="fas fa-calendar-alt"></i>
+                        </div>
+                        <div class="summary-details">
+                            <h3>Last Upload</h3>
+                            <p class="summary-date">15 Mar 2025</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <!-- Upload Report Modal -->
+    <div id="uploadModal" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2>Upload New Medical Report</h2>
+                <span class="close-modal">&times;</span>
+            </div>
+            <div class="modal-body">
+                <form id="uploadForm">
+                    <div class="form-group">
+                        <label for="reportName">Report Name</label>
+                        <input type="text" id="reportName" name="reportName" placeholder="Enter report name" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="reportType">Report Type</label>
+                        <select id="reportType" name="reportType" required>
+                            <option value="">Select report type</option>
+                            <option value="xray">X-Ray</option>
+                            <option value="blood">Blood Test</option>
+                            <option value="mri">MRI</option>
+                            <option value="ct">CT Scan</option>
+                            <option value="ecg">ECG</option>
+                            <option value="other">Other</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="reportDate">Report Date</label>
+                        <input type="date" id="reportDate" name="reportDate" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="doctorName">Doctor Name</label>
+                        <input type="text" id="doctorName" name="doctorName" placeholder="Enter doctor name" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="reportFile">Upload Report File</label>
+                        <div class="file-upload-container">
+                            <div class="file-upload-area" id="dropArea">
+                                <i class="fas fa-cloud-upload-alt"></i>
+                                <p>Drag & Drop files here or</p>
+                                <label for="reportFile" class="file-upload-btn">Browse Files</label>
+                                <input type="file" id="reportFile" name="reportFile" accept=".pdf,.jpg,.jpeg,.png" hidden required>
+                            </div>
+                            <div class="file-preview" id="filePreview"></div>
+                        </div>
+                        <p class="file-hint">Accepted formats: PDF, JPG, JPEG, PNG (Max size: 10MB)</p>
+                    </div>
+                    <div class="form-group">
+                        <label for="reportNotes">Notes (Optional)</label>
+                        <textarea id="reportNotes" name="reportNotes" placeholder="Add any additional notes about this report"></textarea>
+                    </div>
+                    <div class="form-actions">
+                        <button type="button" class="btn secondary-btn" id="cancelUpload">Cancel</button>
+                        <button type="submit" class="btn primary-btn">Upload Report</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <p>&copy; <span id="current-year"></span> MediVault - Medical Report Management System. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <script src="reports.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            // Dynamically set the username
+            const username = localStorage.getItem('username') || 'User';
+            document.getElementById('username').textContent = username;
+
+            // Logout functionality
+            document.getElementById('logoutBtn').addEventListener('click', function() {
+                localStorage.removeItem('username');
+                localStorage.removeItem('userEmail');
+                window.location.href = '../login.html';
+            });
+        });
+    </script>
+</body>
+</html>

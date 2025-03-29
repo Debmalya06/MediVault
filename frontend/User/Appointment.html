@@ -1,0 +1,447 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Book Appointment - MediVault</title>
+    <link rel="stylesheet" href="appointment.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+</head>
+<body>
+    <!-- Header/Navigation Bar -->
+    <header class="main-header">
+        <div class="container">
+            <div class="logo">
+                <h1>MediVault</h1>
+            </div>
+            <nav class="main-nav">
+                <ul class="nav-links">
+                    <li><a href="index.html"><i class="fas fa-home"></i> Home</a></li>
+                    <li><a href="reports.html"><i class="fas fa-file-medical"></i> Reports</a></li>
+                    <li class="active"><a href="appointment.html"><i class="fas fa-calendar-check"></i> Appointment</a></li>
+                </ul>
+                <div class="user-profile">
+                    <div class="user-dropdown">
+                        <button class="dropdown-btn">
+                            <i class="fas fa-user-circle"></i> <span id="username">User</span> <i class="fas fa-chevron-down"></i>
+                        </button>
+                        <div class="dropdown-content">
+                            <a href="#"><i class="fas fa-user"></i> Profile</a>
+                            <a href="#"><i class="fas fa-cog"></i> Settings</a>
+                            <a href="#" id="logoutBtn" ><i class="fas fa-sign-out-alt"></i> Logout</a>
+                        </div>
+                    </div>
+                </div>
+            </nav>
+        </div>
+    </header>
+
+    <!-- Main Content -->
+    <main>
+        <div class="container">
+            <div class="page-header">
+                <h1>Book an Appointment</h1>
+                <p>Schedule a consultation with our medical specialists</p>
+            </div>
+
+            <!-- Appointment Tabs -->
+            <div class="appointment-tabs">
+                <button class="tab-btn active" data-tab="new-appointment">New Appointment</button>
+                <button class="tab-btn" data-tab="my-appointments">My Appointments</button>
+            </div>
+
+            <!-- Tab Content -->
+            <div class="tab-content">
+                <!-- New Appointment Tab -->
+                <div class="tab-pane active" id="new-appointment">
+                    <div class="appointment-container">
+                        <!-- Appointment Form -->
+                        <div class="appointment-form-container">
+                            <form id="appointmentForm" class="appointment-form">
+                                <h2>Patient Information</h2>
+                                
+                                <div class="form-group">
+                                    <label for="fullName">Full Name</label>
+                                    <input type="text" id="fullName" name="fullName" placeholder="Enter your full name" required>
+                                </div>
+                                
+                                <div class="form-row">
+                                    <div class="form-group">
+                                        <label for="email">Email Address</label>
+                                        <input type="email" id="email" name="email" placeholder="Enter your email" required>
+                                    </div>
+                                    
+                                    <div class="form-group">
+                                        <label for="phone">Phone Number</label>
+                                        <input type="tel" id="phone" name="phone" placeholder="Enter your phone number" required>
+                                    </div>
+                                </div>
+                                
+                                <div class="form-row">
+                                    <div class="form-group">
+                                        <label for="age">Age</label>
+                                        <input type="number" id="age" name="age" placeholder="Enter your age" min="1" max="120" required>
+                                    </div>
+                                    
+                                    <div class="form-group">
+                                        <label for="gender">Gender</label>
+                                        <select id="gender" name="gender" required>
+                                            <option value="">Select Gender</option>
+                                            <option value="male">Male</option>
+                                            <option value="female">Female</option>
+                                            <option value="other">Other</option>
+                                        </select>
+                                    </div>
+                                </div>
+                                
+                                <h2>Appointment Details</h2>
+                                
+                                <div class="form-group">
+                                    <label for="appointmentType">Appointment Type</label>
+                                    <select id="appointmentType" name="appointmentType" required>
+                                        <option value="">Select Appointment Type</option>
+                                        <option value="general">General Checkup</option>
+                                        <option value="specialist">Specialist Consultation</option>
+                                        <option value="followup">Follow-up Visit</option>
+                                        <option value="emergency">Emergency</option>
+                                    </select>
+                                </div>
+                                
+                                <div class="form-group">
+                                    <label for="specialization">Specialization</label>
+                                    <select id="specialization" name="specialization" required>
+                                        <option value="">Select Specialization</option>
+                                        <option value="general">General Physician</option>
+                                        <option value="cardiology">Cardiology</option>
+                                        <option value="neurology">Neurology</option>
+                                        <option value="orthopedics">Orthopedics</option>
+                                        <option value="dermatology">Dermatology</option>
+                                        <option value="pediatrics">Pediatrics</option>
+                                    </select>
+                                </div>
+                                
+                                <div class="form-group">
+                                    <label for="doctor">Select Doctor</label>
+                                    <select id="doctor" name="doctor" required>
+                                        <option value="">Select Doctor</option>
+                                        <option value="dr-chen">Dr. Michael Chen - General Physician</option>
+                                        <option value="dr-johnson">Dr. Sarah Johnson - Cardiologist</option>
+                                        <option value="dr-wilson">Dr. James Wilson - Neurologist</option>
+                                    </select>
+                                </div>
+                                
+                                <div class="form-row">
+                                    <div class="form-group">
+                                        <label for="appointmentDate">Preferred Date</label>
+                                        <input type="date" id="appointmentDate" name="appointmentDate" required>
+                                    </div>
+                                    
+                                    <div class="form-group">
+                                        <label for="appointmentTime">Preferred Time</label>
+                                        <select id="appointmentTime" name="appointmentTime" required>
+                                            <option value="">Select Time</option>
+                                            <option value="morning">Morning (9:00 AM - 12:00 PM)</option>
+                                            <option value="afternoon">Afternoon (1:00 PM - 5:00 PM)</option>
+                                            <option value="evening">Evening (6:00 PM - 8:00 PM)</option>
+                                        </select>
+                                    </div>
+                                </div>
+                                
+                                <div class="form-group">
+                                    <label for="reason">Reason for Appointment</label>
+                                    <textarea id="reason" name="reason" placeholder="Please describe your symptoms or reason for the appointment" rows="4" required></textarea>
+                                </div>
+                                
+                                <div class="form-group">
+                                    <label>Have you visited us before?</label>
+                                    <div class="radio-group">
+                                        <label class="radio-label">
+                                            <input type="radio" name="previousVisit" value="yes"> Yes
+                                        </label>
+                                        <label class="radio-label">
+                                            <input type="radio" name="previousVisit" value="no" checked> No
+                                        </label>
+                                    </div>
+                                </div>
+                                
+                                <div class="form-actions">
+                                    <button type="reset" class="btn secondary-btn">Reset Form</button>
+                                    <button type="submit" class="btn primary-btn">Book Appointment</button>
+                                </div>
+                            </form>
+                        </div>
+
+                        <!-- Doctor Selection Section -->
+                        <div class="doctor-selection">
+                            <h2>Available Doctors</h2>
+                            <div class="filter-options">
+                                <select id="filterSpecialization">
+                                    <option value="all">All Specializations</option>
+                                    <option value="general">General Physician</option>
+                                    <option value="cardiology">Cardiology</option>
+                                    <option value="neurology">Neurology</option>
+                                </select>
+                                <select id="filterAvailability">
+                                    <!-- <option value="all">All Availability</option>
+                                    
+                                    <option value="Sunday">Available Sunday</option>
+                                    <option value="Monday">Available Monday</option>
+                                    <option value="Tuesday">Available Tuesday</option>
+                                    <option value="wednesday">Available wednesday</option>
+                                    <option value="Thursday">Available Thursday</option>
+                                    <option value="Friday">Available Friday</option>
+                                    <option value="Saturday">Available Saturday</option>
+                                     -->
+
+                                </select>
+                            </div>
+                            <div class="doctors-list">
+                                <!-- <div class="doctor-card" data-doctor="dr-chen" data-specialization="general" data-availability="today">
+                                    <img src="/placeholder.svg?height=100&width=100" alt="Dr. Michael Chen" class="doctor-image">
+                                    <div class="doctor-info">
+                                        <h3>Dr. Michael Chen</h3>
+                                        <p class="doctor-specialty">General Physician</p>
+                                        <div class="doctor-rating">
+                                            <i class="fas fa-star"></i>
+                                            <i class="fas fa-star"></i>
+                                            <i class="fas fa-star"></i>
+                                            <i class="fas fa-star"></i>
+                                            <i class="fas fa-star-half-alt"></i>
+                                            <span>(120 reviews)</span>
+                                        </div>
+                                        <p class="doctor-availability available">
+                                            <i class="fas fa-calendar-check"></i> Available Sunday
+                                            
+                                        </p>
+                                        <p class="doctor-availability available">
+                                            <i class="fas fa-calendar-check"></i> 
+                                            Available Wednesday
+                                        </p>
+                                        <button class="btn outline-btn select-doctor-btn" data-doctor="dr-chen">Select</button>
+                                    </div>
+                                </div>
+                                
+                                <div class="doctor-card" data-doctor="dr-johnson" data-specialization="cardiology" data-availability="tomorrow">
+                                    <img src="/placeholder.svg?height=100&width=100" alt="Dr. Sarah Johnson" class="doctor-image">
+                                    <div class="doctor-info">
+                                        <h3>Dr. Sarah Johnson</h3>
+                                        <p class="doctor-specialty">Cardiologist</p>
+                                        <div class="doctor-rating">
+                                            <i class="fas fa-star"></i>
+                                            <i class="fas fa-star"></i>
+                                            <i class="fas fa-star"></i>
+                                            <i class="fas fa-star"></i>
+                                            <i class="far fa-star"></i>
+                                            <span>(95 reviews)</span>
+                                        </div>
+                                        <p class="doctor-availability available">
+                                            <i class="fas fa-calendar-check"></i> 
+                                            Available Wednesday
+                                        </p>
+                                        <p class="doctor-availability available">
+                                            <i class="fas fa-calendar-check"></i> 
+                                            Available Friday
+                                        </p>
+                                        <button class="btn outline-btn select-doctor-btn" data-doctor="dr-johnson">Select</button>
+                                    </div>
+                                </div>
+                                
+                                <div class="doctor-card" data-doctor="dr-wilson" data-specialization="neurology" data-availability="week">
+                                    <img src="/placeholder.svg?height=100&width=100" alt="Dr. James Wilson" class="doctor-image">
+                                    <div class="doctor-info">
+                                        <h3>Dr. James Wilson</h3>
+                                        <p class="doctor-specialty">Neurologist</p>
+                                        <div class="doctor-rating">
+                                            <i class="fas fa-star"></i>
+                                            <i class="fas fa-star"></i>
+                                            <i class="fas fa-star"></i>
+                                            <i class="fas fa-star"></i>
+                                            <i class="far fa-star"></i>
+                                            <span>(88 reviews)</span>
+                                        </div>
+                                        <p class="doctor-availability available">
+                                            <i class="fas fa-calendar-check"></i> 
+                                            Available Monday
+                                        </p>
+                                        <p class="doctor-availability available">
+                                            <i class="fas fa-calendar-check"></i> 
+                                            Available Tuesday
+                                        </p>
+                                        <p class="doctor-availability available">
+                                            <i class="fas fa-calendar-check"></i> 
+                                            Available Saturday
+                                        </p>
+                                        <button class="btn outline-btn select-doctor-btn" data-doctor="dr-wilson">Select</button>
+                                    </div>
+                                </div>
+                            </div> -->
+                        </div>
+                    </div>
+                </div>
+
+                <!-- My Appointments Tab -->
+                <div class="tab-pane" id="my-appointments">
+                    <div class="my-appointments-container">
+                        <div class="appointments-header">
+                            <h2>My Appointments</h2>
+                            <div class="appointments-filter">
+                                <select id="appointmentStatusFilter">
+                                    <option value="all">All Appointments</option>
+                                    <option value="upcoming">Upcoming</option>
+                                    <option value="completed">Completed</option>
+                                    <option value="cancelled">Cancelled</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="appointments-list">
+                            <div class="appointment-item upcoming">
+                                <div class="appointment-date">
+                                    <div class="date-box">
+                                        <span class="month">MAR</span>
+                                        <span class="day">20</span>
+                                    </div>
+                                    <span class="time">10:30 AM</span>
+                                </div>
+                                <div class="appointment-details">
+                                    <h3>General Checkup</h3>
+                                    <p><i class="fas fa-user-md"></i> Dr. Michael Chen</p>
+                                    <p><i class="fas fa-map-marker-alt"></i> Main Hospital, Room 302</p>
+                                    <span class="appointment-status confirmed">Confirmed</span>
+                                </div>
+                                <div class="appointment-actions">
+                                    <button class="btn outline-btn"><i class="fas fa-edit"></i> Reschedule</button>
+                                    <button class="btn outline-danger"><i class="fas fa-times"></i> Cancel</button>
+                                </div>
+                            </div>
+                            
+                            <div class="appointment-item upcoming">
+                                <div class="appointment-date">
+                                    <div class="date-box">
+                                        <span class="month">APR</span>
+                                        <span class="day">05</span>
+                                    </div>
+                                    <span class="time">2:15 PM</span>
+                                </div>
+                                <div class="appointment-details">
+                                    <h3>Dental Checkup</h3>
+                                    <p><i class="fas fa-user-md"></i> Dr. Sarah Johnson</p>
+                                    <p><i class="fas fa-map-marker-alt"></i> Dental Clinic, Room 105</p>
+                                    <span class="appointment-status confirmed">Confirmed</span>
+                                </div>
+                                <div class="appointment-actions">
+                                    <button class="btn outline-btn"><i class="fas fa-edit"></i> Reschedule</button>
+                                    <button class="btn outline-danger"><i class="fas fa-times"></i> Cancel</button>
+                                </div>
+                            </div>
+                            
+                            <div class="appointment-item completed">
+                                <div class="appointment-date">
+                                    <div class="date-box">
+                                        <span class="month">FEB</span>
+                                        <span class="day">15</span>
+                                    </div>
+                                    <span class="time">9:00 AM</span>
+                                </div>
+                                <div class="appointment-details">
+                                    <h3>Annual Physical</h3>
+                                    <p><i class="fas fa-user-md"></i> Dr. Michael Chen</p>
+                                    <p><i class="fas fa-map-marker-alt"></i> Main Hospital, Room 302</p>
+                                    <span class="appointment-status completed">Completed</span>
+                                </div>
+                                <div class="appointment-actions">
+                                    <button class="btn outline-btn"><i class="fas fa-file-medical"></i> View Report</button>
+                                    <button class="btn primary-btn"><i class="fas fa-calendar-plus"></i> Book Follow-up</button>
+                                </div>
+                            </div>
+                            
+                            <div class="appointment-item cancelled">
+                                <div class="appointment-date">
+                                    <div class="date-box">
+                                        <span class="month">JAN</span>
+                                        <span class="day">28</span>
+                                    </div>
+                                    <span class="time">3:30 PM</span>
+                                </div>
+                                <div class="appointment-details">
+                                    <h3>Dermatology Consultation</h3>
+                                    <p><i class="fas fa-user-md"></i> Dr. Emily Parker</p>
+                                    <p><i class="fas fa-map-marker-alt"></i> Dermatology Clinic, Room 205</p>
+                                    <span class="appointment-status cancelled">Cancelled</span>
+                                </div>
+                                <div class="appointment-actions">
+                                    <button class="btn primary-btn"><i class="fas fa-calendar-plus"></i> Reschedule</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <!-- Appointment Confirmation Modal -->
+    <div id="confirmationModal" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2>Appointment Confirmed</h2>
+                <span class="close-modal">&times;</span>
+            </div>
+            <div class="modal-body">
+                <div class="confirmation-icon">
+                    <i class="fas fa-check-circle"></i>
+                </div>
+                <h3>Your appointment has been scheduled successfully!</h3>
+                <div class="confirmation-details">
+                    <p><strong>Doctor:</strong> <span id="confirmDoctor"></span></p>
+                    <p><strong>Date:</strong> <span id="confirmDate"></span></p>
+                    <p><strong>Time:</strong> <span id="confirmTime"></span></p>
+                </div>
+                <p class="confirmation-message">We've sent a confirmation email with all the details. Please arrive 15 minutes before your scheduled appointment time.</p>
+                <div class="modal-actions">
+                    <button class="btn primary-btn" id="closeConfirmation">Done</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-logo">
+                    <h2>MediVault</h2>
+                    <p>Your personal medical assistant</p>
+                </div>
+                <div class="footer-links">
+                    <h3>Quick Links</h3>
+                    <ul>
+                        <li><a href="index.html">Home</a></li>
+                        <li><a href="reports.html">Reports</a></li>
+                        <li><a href="appointment.html">Appointments</a></li>
+                        <li><a href="#">About Us</a></li>
+                        <li><a href="#">Contact</a></li>
+                    </ul>
+                </div>
+                <div class="footer-contact">
+                    <h3>Contact Us</h3>
+                    <p><i class="fas fa-envelope"></i> support@medivault.com</p>
+                    <p><i class="fas fa-phone"></i> +1 (555) 123-4567</p>
+                    <div class="social-icons">
+                        <a href="#"><i class="fab fa-facebook"></i></a>
+                        <a href="#"><i class="fab fa-twitter"></i></a>
+                        <a href="#"><i class="fab fa-instagram"></i></a>
+                        <a href="#"><i class="fab fa-linkedin"></i></a>
+                    </div>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; <span id="current-year"></span> MediVault. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="appointment.js"></script>
+    
+</body>
+</html>

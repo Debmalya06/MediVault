@@ -1,0 +1,328 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MediVault - Your Medical Dashboard</title>
+    <link rel="stylesheet" href="home.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+</head>
+<body>
+    <!-- Header/Navigation Bar -->
+    <header class="main-header">
+        <div class="container">
+            <div class="logo">
+                <h1>MediVault</h1>
+            </div>
+            <nav class="main-nav">
+                <ul class="nav-links">
+                    <li class="active"><a href="index.html"><i class="fas fa-home"></i> Home</a></li>
+                    <li><a href="reports.html"><i class="fas fa-file-medical"></i> Reports</a></li>
+                    <li><a href="appointment.html"><i class="fas fa-calendar-check"></i> Appointment</a></li>
+                </ul>
+                <div class="user-profile" id="User">
+                    <div class="user-dropdown">
+                        <button class="dropdown-btn">
+                            <i class="fas fa-user-circle"></i> <p id="username">User</p> <i class="fas fa-chevron-down"></i>
+                        </button>
+                        <div class="dropdown-content">
+                            <a href="#"><i class="fas fa-user"></i> Profile</a>
+                            <a href="#"><i class="fas fa-cog"></i> Settings</a>
+                            <a href="#" id="logoutBtn"><i class="fas fa-sign-out-alt"></i> Logout</a>
+                        </div>
+                    </div>
+                </div>
+            </nav>
+        </div>
+    </header>
+
+    <!-- Main Content -->
+    <main>
+        <div class="container">
+            <!-- Welcome Section -->
+            <section class="welcome-section">
+                <div class="welcome-card">
+                    <div class="welcome-content">
+                        <div class="welcome-text">
+                            <h2>Welcome to MediVault</h2>
+                            <p>Your health dashboard is updated with the latest information.</p>
+                        </div>
+                        <div class="welcome-stats">
+                            <div class="stat-card">
+                                <div class="stat-icon">
+                                    <i class="fas fa-file-medical"></i>
+                                </div>
+                                <div class="stat-info">
+                                    <h3 id="total-reports">0</h3>
+                                    <p>Medical Reports</p>
+                                </div>
+                            </div>
+                            <div class="stat-card">
+                                <div class="stat-icon">
+                                    <i class="fas fa-calendar-check"></i>
+                                </div>
+                                <div class="stat-info">
+                                    <h3>3</h3>
+                                    <p>Upcoming Appointments</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Features Section -->
+            <section class="features-section">
+                <h2 class="section-title">Our Services</h2>
+                <div class="features-grid">
+                    <div class="feature-card">
+                        <div class="feature-icon">
+                            <i class="fas fa-file-upload"></i>
+                        </div>
+                        <h3>Medical Reports</h3>
+                        <p>Store and manage all your medical reports in one secure place. Access them anytime, anywhere.</p>
+                        <a href="reports.html" class="btn primary-btn">Manage Reports</a>
+                    </div>
+                    <div class="feature-card">
+                        <div class="feature-icon">
+                            <i class="fas fa-x-ray"></i>
+                        </div>
+                        <h3>Report Analysis</h3>
+                        <p>Upload your Report and get AI-powered analysis and insights within minutes.</p>
+                        <a href="http://localhost:8502" class="btn primary-btn">Analyze Reports</a>
+                    </div>
+                    <div class="feature-card">
+                        <div class="feature-icon">
+                            <i class="fas fa-calendar-alt"></i>
+                        </div>
+                        <h3>Appointment Booking</h3>
+                        <p>Book appointments with our specialists and manage your schedule efficiently.</p>
+                        <a href="appointment.html" class="btn primary-btn">Book Appointment</a>
+                    </div>
+                    <div class="feature-card">
+                        <div class="feature-icon">
+                            <i class="fas fa-comment-medical"></i>
+                        </div>
+                        <h3>Skin Disease Chat</h3>
+                        <p>Chat with our AI model by uploading images of skin conditions for quick analysis.</p>
+                        <a href="#" id="startChatBtn" class="btn primary-btn">Start Chat</a>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Recent Activity & Upcoming Appointments -->
+            <div class="dashboard-grid">
+                <!-- Recent Activity -->
+                <section class="recent-activity">
+                    <div class="section-header">
+                        <h2 class="section-title">Recent Activity</h2>
+                        <a href="#" class="view-all">View All <i class="fas fa-chevron-right"></i></a>
+                    </div>
+                    <div class="activity-list">
+                        <div class="activity-item">
+                            <div class="activity-icon">
+                                <i class="fas fa-file-upload"></i>
+                            </div>
+                            <div class="activity-details">
+                                <h4>Report Uploaded</h4>
+                                <p>You uploaded a new Chest X-Ray report</p>
+                                <span class="activity-time">Today, 10:30 AM</span>
+                            </div>
+                        </div>
+                        <div class="activity-item">
+                            <div class="activity-icon">
+                                <i class="fas fa-calendar-check"></i>
+                            </div>
+                            <div class="activity-details">
+                                <h4>Appointment Confirmed</h4>
+                                <p>Your appointment with Dr. Michael Chen is confirmed</p>
+                                <span class="activity-time">Yesterday, 3:45 PM</span>
+                            </div>
+                        </div>
+                        <div class="activity-item">
+                            <div class="activity-icon">
+                                <i class="fas fa-chart-line"></i>
+                            </div>
+                            <div class="activity-details">
+                                <h4>Report Analyzed</h4>
+                                <p>Your Blood Test report has been analyzed</p>
+                                <span class="activity-time">Mar 14, 2025, 9:15 AM</span>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- Upcoming Appointments -->
+                <section class="upcoming-appointments">
+                    <div class="section-header">
+                        <h2 class="section-title">Upcoming Appointments</h2>
+                        <a href="appointment.html" class="view-all">View All <i class="fas fa-chevron-right"></i></a>
+                    </div>
+                    <div class="appointments-list">
+                        <div class="appointment-card">
+                            <div class="appointment-date">
+                                <div class="date-box">
+                                    <span class="month">MAR</span>
+                                    <span class="day">20</span>
+                                </div>
+                                <span class="time">10:30 AM</span>
+                            </div>
+                            <div class="appointment-details">
+                                <h4>General Checkup</h4>
+                                <p><i class="fas fa-user-md"></i> Dr. Michael Chen</p>
+                                <p><i class="fas fa-map-marker-alt"></i> Main Hospital, Room 302</p>
+                            </div>
+                            <div class="appointment-actions">
+                                <button class="btn outline-btn sm-btn"><i class="fas fa-edit"></i></button>
+                                <button class="btn outline-danger sm-btn"><i class="fas fa-times"></i></button>
+                            </div>
+                        </div>
+                        <div class="appointment-card">
+                            <div class="appointment-date">
+                                <div class="date-box">
+                                    <span class="month">APR</span>
+                                    <span class="day">05</span>
+                                </div>
+                                <span class="time">2:15 PM</span>
+                            </div>
+                            <div class="appointment-details">
+                                <h4>Dental Checkup</h4>
+                                <p><i class="fas fa-user-md"></i> Dr. Sarah Johnson</p>
+                                <p><i class="fas fa-map-marker-alt"></i> Dental Clinic, Room 105</p>
+                            </div>
+                            <div class="appointment-actions">
+                                <button class="btn outline-btn sm-btn"><i class="fas fa-edit"></i></button>
+                                <button class="btn outline-danger sm-btn"><i class="fas fa-times"></i></button>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+            </div>
+
+            <!-- Health Insights Section -->
+            <section class="health-insights">
+                <h2 class="section-title">Health Insights</h2>
+                <div class="insights-grid">
+                    <div class="insight-card">
+                        <div class="insight-image">
+                            <img src="img/x-ray.jpg" alt="X-Ray Analysis">
+                        </div>
+                        <div class="insight-content">
+                            <h3>X-Ray Report Analysis</h3>
+                            <p>Our AI-powered system can analyze your chest X-rays and provide detailed insights about your lung health.</p>
+                            <a href="#" class="btn primary-btn">Learn More</a>
+                        </div>
+                    </div>
+                    <div class="insight-card">
+                        <div class="insight-image">
+                            <img src="img/doctor.jpg" alt="Doctor Consultation">
+                        </div>
+                        <div class="insight-content">
+                            <h3>Doctor Consultation</h3>
+                            <p>Connect with our specialists for virtual consultations and get expert medical advice from the comfort of your home.</p>
+                            <a href="#" class="btn primary-btn">Book Consultation</a>
+                        </div>
+                    </div>
+                </div>
+            </section>
+        </div>
+    </main>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-logo">
+                    <h2>MediVault</h2>
+                    <p>Your personal medical assistant</p>
+                </div>
+                <div class="footer-links">
+                    <h3>Quick Links</h3>
+                    <ul>
+                        <li><a href="index.html">Home</a></li>
+                        <li><a href="reports.html">Reports</a></li>
+                        <li><a href="appointment.html">Appointments</a></li>
+                        <li><a href="#">About Us</a></li>
+                        <li><a href="#">Contact</a></li>
+                    </ul>
+                </div>
+                <div class="footer-contact">
+                    <h3>Contact Us</h3>
+                    <p><i class="fas fa-envelope"></i> support@medivault.com</p>
+                    <p><i class="fas fa-phone"></i> +1 (555) 123-4567</p>
+                    <div class="social-icons">
+                        <a href="#"><i class="fab fa-facebook"></i></a>
+                        <a href="#"><i class="fab fa-twitter"></i></a>
+                        <a href="#"><i class="fab fa-instagram"></i></a>
+                        <a href="#"><i class="fab fa-linkedin"></i></a>
+                    </div>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; <span id="current-year"></span> MediVault. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="home.js"></script>
+
+    <script>
+        function toggleOptions() {
+            const options = document.getElementById('option');
+            if (options.style.display === 'flex') {
+                options.style.display = 'none';
+            } else {
+                options.style.display = 'flex';
+            }
+        }
+
+        document.addEventListener('DOMContentLoaded', function() {
+            // Dynamically set the username
+            const username = localStorage.getItem('username') || 'User';
+            document.getElementById('username').textContent = username;
+
+            // Close the options menu when clicking outside
+            document.addEventListener('click', function(event) {
+                const options = document.getElementById('option');
+                const userButton = document.getElementById('User');
+                if (!userButton.contains(event.target)) {
+                    options.style.display = 'none';
+                }
+            });
+
+            // Logout functionality
+            document.getElementById('logoutBtn').addEventListener('click', function() {
+                localStorage.removeItem('username');
+                window.location.href = '../login.html';
+            });
+
+            // Open chat in a new window
+            document.getElementById('startChatBtn').addEventListener('click', function(event) {
+                event.preventDefault();
+                const width = 400;
+                const height = 600;
+                const left = screen.width - width - 10;
+                const top = screen.height - height - 50;
+                window.open('http://localhost:8501', '_blank', `width=${width},height=${height},left=${left},top=${top}`);
+            });
+
+            // Fetch total reports count
+            async function fetchTotalReports() {
+                try {
+                    const response = await fetch(`http://localhost:8081/api/reports?userEmail=${localStorage.getItem('userEmail')}`);
+                    const reports = await response.json();
+                    const totalReports = reports.length;
+                    document.getElementById('total-reports').textContent = totalReports;
+                } catch (error) {
+                    console.error('Error fetching total reports:', error);
+                }
+            }
+
+            fetchTotalReports();
+        });
+    </script>
+    <script type="module" src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.esm.js"></script>
+    <script nomodule src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.js"></script>
+</body>
+</html>
