@@ -1,0 +1,21 @@
+{
+  "manifest_version": 3,
+  "name": "Medical Report Monitor",
+  "version": "1.0",
+  "description": "Analyzes medical reports and alerts based on search activity.",
+  "permissions": ["activeTab", "storage"],
+  "host_permissions": ["http://127.0.0.1:5000/*"],
+  "background": {
+    "service_worker": "background.js"
+  },
+  "content_scripts": [
+    {
+      "matches": ["*://*.google.com/*", "*://*.amazon.com/*", "*://*.flipkart.com/*"],
+      "js": ["content.js"]
+    }
+  ],
+  "action": {
+    "default_popup": "popup.html",
+    "default_icon": "icon128.png"
+  }
+}
