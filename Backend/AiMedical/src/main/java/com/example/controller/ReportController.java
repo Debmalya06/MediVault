@@ -1,7 +1,7 @@
 package com.example.controller;
 
-import com.example.Model.Report;
 import com.example.dto.ApiResponse;
+import com.example.model.Report;
 import com.example.service.ReportService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;

@@ -1,9 +1,10 @@
 // filepath: d:\BACKEND\Spring Boot VScode\AI-Paitent website\Backend\AiMedical\src\main\java\com\example\Repository\ReportRepository.java
-package com.example.Repository;
+package com.example.repository;
 
-import com.example.Model.Report;
-import com.example.Model.User;
 import org.springframework.data.jpa.repository.JpaRepository;
+
+import com.example.model.Report;
+import com.example.model.User;
 
 import java.util.List;
 

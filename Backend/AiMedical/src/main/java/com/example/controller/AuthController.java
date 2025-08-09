@@ -3,8 +3,8 @@ package com.example.controller;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-import com.example.Model.User;
 import com.example.dto.LoginRequest;
+import com.example.model.User;
 import com.example.dto.ApiResponse;
 import com.example.service.UserService;
 

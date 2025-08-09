@@ -1,8 +1,10 @@
 package com.example.service;
 
 import org.springframework.stereotype.Service;
-import com.example.Model.User;
-import com.example.Repository.UserRepository;
+
+import com.example.model.User;
+import com.example.repository.UserRepository;
+
 import java.util.Optional;
 
 @Service

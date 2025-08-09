@@ -1,7 +1,7 @@
 package com.example.controller;
 
-import com.example.Model.Doctor;
 import com.example.dto.DoctorDTO;
+import com.example.model.Doctor;
 import com.example.service.DoctorService;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.springframework.beans.factory.annotation.Autowired;

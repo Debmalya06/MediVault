@@ -2,8 +2,9 @@ package com.example.service;
 
 import com.cloudinary.Cloudinary;
 import com.cloudinary.utils.ObjectUtils;
-import com.example.Model.Doctor;
-import com.example.Repository.DoctorRepository;
+import com.example.model.Doctor;
+import com.example.repository.DoctorRepository;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;

@@ -7,10 +7,10 @@ import org.springframework.context.annotation.ComponentScan;
 import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
 
 @SpringBootApplication
-@EntityScan("com.example.Model")
-@ComponentScan(basePackages = {"com.example.controller", "com.example.Model", "com.example.service", "com.example.config"})
+@EntityScan("com.example.model")
+@ComponentScan(basePackages = {"com.example.controller", "com.example.model", "com.example.service", "com.example.config"})
 
-@EnableJpaRepositories(basePackages = "com.example.Repository")
+@EnableJpaRepositories(basePackages = "com.example.repository")
 public class AiMedicalApplication {
 
     public static void main(String[] args) {

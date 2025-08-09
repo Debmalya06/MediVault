@@ -2,10 +2,11 @@ package com.example.service;
 
 import com.cloudinary.Cloudinary;
 import com.cloudinary.utils.ObjectUtils;
-import com.example.Model.Report;
-import com.example.Model.User;
-import com.example.Repository.ReportRepository;
-import com.example.Repository.UserRepository;
+import com.example.model.Report;
+import com.example.model.User;
+import com.example.repository.ReportRepository;
+import com.example.repository.UserRepository;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;

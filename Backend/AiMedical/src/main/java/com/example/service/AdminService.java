@@ -1,8 +1,9 @@
 package com.example.service;
 
-import com.example.Model.Admin;
-import com.example.Repository.AdminRepository;
 import com.example.dto.ApiResponseAdmin;
+import com.example.model.Admin;
+import com.example.repository.AdminRepository;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 

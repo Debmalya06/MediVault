@@ -1,6 +1,6 @@
 package com.example.dto;
 
-import com.example.Model.Admin;
+import com.example.model.Admin;
 
 public class ApiResponseAdmin {
     private boolean success;

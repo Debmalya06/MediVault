@@ -1,5 +1,5 @@
 // filepath: d:\BACKEND\Spring Boot VScode\AI-Paitent website\Backend\AiMedical\src\main\java\com\example\Model\User.java
-package com.example.Model;
+package com.example.model;
 
 import jakarta.persistence.*;
 import lombok.*;
