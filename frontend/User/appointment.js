@@ -115,47 +115,6 @@ appointmentStatusFilter.addEventListener('change', function() {
     });
 });
 
-// Form submission
-appointmentForm.addEventListener('submit', function(e) {
-    e.preventDefault();
-    
-    // Get form values for confirmation
-    const doctorValue = doctorSelect.value;
-    const dateValue = document.getElementById('appointmentDate').value;
-    const timeValue = document.getElementById('appointmentTime').value;
-    
-    // Set confirmation values
-    let doctorName = '';
-    if (doctorValue === 'dr-chen') {
-        doctorName = 'Dr. Michael Chen';
-    } else if (doctorValue === 'dr-johnson') {
-        doctorName = 'Dr. Sarah Johnson';
-    } else if (doctorValue === 'dr-wilson') {
-        doctorName = 'Dr. James Wilson';
-    }
-    
-    confirmDoctor.textContent = doctorName;
-    
-    // Format date
-    const formattedDate = formatDate(dateValue);
-    confirmDate.textContent = formattedDate;
-    
-    // Format time
-    let timeText = '';
-    if (timeValue === 'morning') {
-        timeText = 'Morning (9:00 AM - 12:00 PM)';
-    } else if (timeValue === 'afternoon') {
-        timeText = 'Afternoon (1:00 PM - 5:00 PM)';
-    } else if (timeValue === 'evening') {
-        timeText = 'Evening (6:00 PM - 8:00 PM)';
-    }
-    confirmTime.textContent = timeText;
-    
-    // Show confirmation modal
-    confirmationModal.style.display = 'block';
-    document.body.style.overflow = 'hidden';
-});
-
 // Format date function
 function formatDate(dateString) {
     const options = { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' };
@@ -335,4 +294,126 @@ async function fetchDoctors() {
 // Call fetchDoctors when the page loads
 document.addEventListener("DOMContentLoaded", function () {
     fetchDoctors();
+});
+
+document.addEventListener('DOMContentLoaded', function () {
+    const appointmentForm = document.getElementById('appointmentForm');
+    const confirmationModal = document.getElementById('confirmationModal');
+    const closeConfirmation = document.getElementById('closeConfirmation');
+    const confirmDoctor = document.getElementById('confirmDoctor');
+    const confirmDate = document.getElementById('confirmDate');
+    const confirmTime = document.getElementById('confirmTime');
+
+    appointmentForm.addEventListener('submit', async function (e) {
+        e.preventDefault();
+
+        // Collect form data
+        const data = {
+            fullName: document.getElementById('fullName').value,
+            email: document.getElementById('email').value,
+            phone: document.getElementById('phone').value,
+            age: parseInt(document.getElementById('age').value),
+            gender: document.getElementById('gender').value,
+            appointmentType: document.getElementById('appointmentType').value,
+            specialization: document.getElementById('specialization').value,
+            doctor: document.getElementById('doctor').value,
+            appointmentDate: document.getElementById('appointmentDate').value,
+            appointmentTime: document.getElementById('appointmentTime').value,
+            reason: document.getElementById('reason').value,
+            previousVisit: document.querySelector('input[name="previousVisit"]:checked').value
+        };
+
+        try {
+            const response = await fetch('http://localhost:8081/api/appointments/book', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify(data)
+            });
+
+            const result = await response.json();
+
+            if (response.ok && result.success) {
+                // Show confirmation modal
+                confirmDoctor.textContent = data.doctor;
+                confirmDate.textContent = data.appointmentDate;
+                confirmTime.textContent = data.appointmentTime;
+                confirmationModal.style.display = 'block';
+                appointmentForm.reset();
+            } else {
+                alert(result.message || 'Failed to book appointment');
+            }
+        } catch (error) {
+            alert('Error booking appointment: ' + error.message);
+        }
+    });
+
+    // Close confirmation modal
+    closeConfirmation.addEventListener('click', function () {
+        confirmationModal.style.display = 'none';
+    });
+
+    // Optional: Close modal when clicking outside
+    window.addEventListener('click', function (e) {
+        if (e.target === confirmationModal) {
+            confirmationModal.style.display = 'none';
+        }
+    });
+});
+
+// Function to fetch and display appointments for the logged-in user
+async function loadMyAppointments() {
+    const email = localStorage.getItem('userEmail'); // Or get from your login/session
+    if (!email) return;
+
+    try {
+        const response = await fetch(`http://localhost:8081/api/appointments?email=${encodeURIComponent(email)}`);
+        const appointments = await response.json();
+
+        const appointmentsList = document.querySelector('.appointments-list');
+        appointmentsList.innerHTML = '';
+
+        if (appointments.length === 0) {
+            appointmentsList.innerHTML = '<p>No appointments found.</p>';
+            return;
+        }
+
+        appointments.forEach(app => {
+            const item = document.createElement('div');
+            item.className = `appointment-item ${app.status}`;
+
+            item.innerHTML = `
+                <div class="appointment-date">
+                    <div class="date-box">
+                        <span class="month">${new Date(app.appointmentDate).toLocaleString('en-US', { month: 'short' }).toUpperCase()}</span>
+                        <span class="day">${new Date(app.appointmentDate).getDate()}</span>
+                    </div>
+                    <span class="time">${app.appointmentTime}</span>
+                </div>
+                <div class="appointment-details">
+                    <h3>${app.appointmentType}</h3>
+                    <p><i class="fas fa-user-md"></i> ${app.doctor}</p>
+                    <p><i class="fas fa-map-marker-alt"></i> ${app.specialization}</p>
+                    <span class="appointment-status ${app.status}">${app.status.charAt(0).toUpperCase() + app.status.slice(1)}</span>
+                </div>
+                <div class="appointment-actions">
+                    <!-- Add reschedule/cancel buttons if needed -->
+                </div>
+            `;
+            appointmentsList.appendChild(item);
+        });
+    } catch (error) {
+        console.error('Error loading appointments:', error);
+    }
+}
+
+// Call this when "My Appointments" tab is shown
+document.querySelector('[data-tab="my-appointments"]').addEventListener('click', loadMyAppointments);
+
+// Optionally, load on page ready if tab is active
+document.addEventListener('DOMContentLoaded', function () {
+    if (document.querySelector('.tab-btn[data-tab="my-appointments"]').classList.contains('active')) {
+        loadMyAppointments();
+    }
 });
