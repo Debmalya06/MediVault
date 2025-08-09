@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Skin Disease Analysis - MediVault</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="appointment.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        .analysis-container { max-width: 500px; margin: 40px auto; background: #fff; border-radius: 8px; box-shadow: 0 2px 8px #eee; padding: 32px; }
+        .analysis-container h2 { margin-bottom: 16px; }
+        .form-group { margin-bottom: 18px; }
+        .response-box { background: #f6f8fa; border-radius: 6px; padding: 18px; margin-top: 24px; }
+        .loading { color: #007bff; margin-top: 12px; }
+        .img-preview { max-width: 100%; margin-bottom: 12px; border-radius: 6px; }
+    </style>
+</head>
+<body>
+    <div class="analysis-container">
+        <h2><i class="fas fa-comment-medical"></i> Skin Disease AI Analysis</h2>
+        <form id="skinForm">
+            <div class="form-group">
+                <label for="skinImage">Upload Skin Image (JPG/PNG):</label>
+                <input type="file" id="skinImage" accept="image/jpeg,image/png" required>
+            </div>
+            <div id="preview"></div>
+            <button type="submit" class="btn primary-btn">Analyze</button>
+        </form>
+        <div id="loading" class="loading" style="display:none;">Analyzing image, please wait...</div>
+        <div id="response" class="response-box" style="display:none;"></div>
+    </div>
+
+    <script>
+    const skinForm = document.getElementById('skinForm');
+    const skinImage = document.getElementById('skinImage');
+    const preview = document.getElementById('preview');
+    const loading = document.getElementById('loading');
+    const responseBox = document.getElementById('response');
+
+    skinImage.addEventListener('change', function() {
+        preview.innerHTML = '';
+        const file = skinImage.files[0];
+        if (file) {
+            const reader = new FileReader();
+            reader.onload = function(e) {
+                preview.innerHTML = `<img src="${e.target.result}" class="img-preview" alt="Skin Preview">`;
+            };
+            reader.readAsDataURL(file);
+        }
+    });
+
+    skinForm.addEventListener('submit', async function(e) {
+        e.preventDefault();
+        responseBox.style.display = 'none';
+        loading.style.display = 'block';
+
+        const file = skinImage.files[0];
+        if (!file) return;
+
+        // Convert image to base64
+        const reader = new FileReader();
+        reader.onload = async function(event) {
+            // Remove the prefix (data:image/jpeg;base64,)
+            const base64 = event.target.result.split(',')[1];
+
+            try {
+                const res = await fetch('http://localhost:8081/api/skin-analysis', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ imageBase64: base64 })
+                });
+                const result = await res.json();
+                loading.style.display = 'none';
+                responseBox.style.display = 'block';
+                if (result.success) {
+                    if (result.aiReply) {
+                        const lines = result.aiReply.split('\n').filter(line => line.trim() !== '');
+                        let bullets = '';
+                        let others = '';
+                        lines.forEach(line => {
+                            const match = line.match(/\*\*(.+?)\*\*/);
+                            if (match) {
+                                // Get bold part and rest of line
+                                const boldText = match[1];
+                                const afterBold = line.replace(`**${boldText}**`, '').trim();
+                                bullets += `<li><b>${boldText}</b>${afterBold ? ': ' + afterBold : ''}</li>`;
+                            } else {
+                                others += `<div>${line}</div>`;
+                            }
+                        });
+                        responseBox.innerHTML = `<strong>AI Response:</strong>` +
+                            (others ? `<div>${others}</div>` : '') +
+                            (bullets ? `<ul>${bullets}</ul>` : '');
+                    } else {
+                        responseBox.innerHTML = `<strong>AI Response:</strong> <b>No result.</b>`;
+                    }
+                } else {
+                    responseBox.innerHTML = `<strong>Error:</strong> ${result.message}`;
+                }
+            } catch (err) {
+                loading.style.display = 'none';
+                responseBox.style.display = 'block';
+                responseBox.innerHTML = `<strong>Error:</strong> ${err.message}`;
+            }
+        };
+        reader.readAsDataURL(file);
+    });
+    </script>
+</body>
+</html>

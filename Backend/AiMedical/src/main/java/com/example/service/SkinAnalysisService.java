@@ -2,6 +2,8 @@ package com.example.service;
 
 import com.example.dto.SkinAnalysisRequest;
 import com.example.dto.GeminiResponse;
+import com.fasterxml.jackson.databind.JsonNode;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
@@ -15,10 +17,7 @@ public class SkinAnalysisService {
 
     public GeminiResponse analyzeSkin(SkinAnalysisRequest request) {
         try {
-            // Use the available model from your API key
             String geminiApiUrl = "https://generativelanguage.googleapis.com/v1/models/gemini-1.5-flash:generateContent?key=" + geminiApiKey;
-            // or use gemini-1.5-pro if you want
-            // String geminiApiUrl = "https://generativelanguage.googleapis.com/v1/models/gemini-1.5-pro:generateContent?key=" + geminiApiKey;
 
             String prompt = "Analyze this skin image and reply if there is any skin problem. Give instructions for care if needed.";
             String payload = "{\n" +
@@ -40,7 +39,22 @@ public class SkinAnalysisService {
 
             ResponseEntity<String> response = restTemplate.postForEntity(geminiApiUrl, entity, String.class);
 
-            String aiReply = response.getBody();
+            // Parse Gemini response to extract only the result text
+            ObjectMapper mapper = new ObjectMapper();
+            JsonNode root = mapper.readTree(response.getBody());
+            String aiReply = "";
+            if (root.has("candidates")) {
+                JsonNode candidates = root.get("candidates");
+                if (candidates.isArray() && candidates.size() > 0) {
+                    JsonNode candidate = candidates.get(0);
+                    if (candidate.has("content") && candidate.get("content").has("parts")) {
+                        JsonNode parts = candidate.get("content").get("parts");
+                        if (parts.isArray() && parts.size() > 0 && parts.get(0).has("text")) {
+                            aiReply = parts.get(0).get("text").asText();
+                        }
+                    }
+                }
+            }
 
             return new GeminiResponse(true, "AI analysis complete", aiReply);
         } catch (Exception e) {
