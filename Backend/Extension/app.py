@@ -7,7 +7,7 @@ import cv2
 import numpy as np
 
 # Configure Gemini API
-genai.configure(api_key="AIzaSyDGlOKC1kb2snFirVNi58sqqM3FjwkWcrI")  # Replace with actual key
+genai.configure(api_key="API_Key")  # Replace with actual key
 
 # Configure MySQL (only to fetch image URLs, not store anything)
 db_config = {
