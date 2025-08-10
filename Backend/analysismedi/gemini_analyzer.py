@@ -1,7 +1,7 @@
 import google.generativeai as genai
 
 # Configure Google Gemini API
-API_KEY = "API_Key"  # Replace with your Gemini API key
+API_KEY = "AIzaSyDrxrViWAVQFXPAyzajDAL6MQDx5pGMRK0"  # Replace with your Gemini API key
 genai.configure(api_key=API_KEY)
 
 def analyze_medical_report(text):
