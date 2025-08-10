@@ -45,4 +45,17 @@ document.addEventListener('DOMContentLoaded', function() {
             this.style.transform = 'translateY(-5px)';
         });
     });
+    
+    // Open report analyzer in a browser side window
+    const analyzeReportBtn = document.getElementById('analyzeReportBtn');
+    if (analyzeReportBtn) {
+        analyzeReportBtn.addEventListener('click', function(event) {
+            event.preventDefault();
+            const width = 480;
+            const height = 700;
+            const left = screen.width - width - 10;
+            const top = screen.height - height - 50;
+            window.open('report-analyzer.html', '_blank', `width=${width},height=${height},left=${left},top=${top}`);
+        });
+    }
 });

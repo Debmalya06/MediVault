@@ -90,7 +90,7 @@
                         </div>
                         <h3>Report Analysis</h3>
                         <p>Upload your Report and get AI-powered analysis and insights within minutes.</p>
-                        <a href="http://localhost:8501" class="btn primary-btn">Analyze Reports</a>
+                        <a href="#" id="analyzeReportBtn" class="btn primary-btn">Analyze Reports</a>
                     </div>
                     <div class="feature-card">
                         <div class="feature-icon">
@@ -310,7 +310,7 @@
             // Fetch total reports count
             async function fetchTotalReports() {
                 try {
-                    const response = await fetch(`http://localhost:8081/api/reports?userEmail=${localStorage.getItem('userEmail')}`);
+                    const response = await fetch(`report-analyzer.html?userEmail=${localStorage.getItem('userEmail')}`);
                     const reports = await response.json();
                     const totalReports = reports.length;
                     document.getElementById('total-reports').textContent = totalReports;

@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Medical Report Analyzer</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <style>
+        body { font-family: Arial, sans-serif; background: #f8f9fa; padding: 32px; }
+        .container { max-width: 480px; margin: 0 auto; background: #fff; border-radius: 8px; box-shadow: 0 4px 18px #eee; padding: 32px; }
+        h2 { margin-bottom: 16px; }
+        .response { background: #f0f2f5; border-radius: 8px; padding: 18px; margin-top: 24px; }
+        .loading { color: #007bff; margin-top: 12px; }
+        input[type="file"] { margin-bottom: 18px; }
+        button { padding: 12px 28px; border: none; background: #2D7FE4; color: #fff; border-radius: 6px; cursor: pointer; font-weight: 600; }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h2>🩺 Medical Report Analyzer</h2>
+        <form id="reportForm">
+            <input type="file" id="reportImage" accept="image/*" required>
+            <button type="submit">Analyze</button>
+        </form>
+        <div id="loading" class="loading" style="display:none;">Analyzing report, please wait...</div>
+        <div id="response" class="response" style="display:none;"></div>
+    </div>
+    <script>
+    const form = document.getElementById('reportForm');
+    const fileInput = document.getElementById('reportImage');
+    const loading = document.getElementById('loading');
+    const responseBox = document.getElementById('response');
+
+    form.addEventListener('submit', async function(e) {
+        e.preventDefault();
+        const file = fileInput.files[0];
+        if (!file) return;
+
+        loading.style.display = 'block';
+        responseBox.style.display = 'none';
+
+        const formData = new FormData();
+        formData.append("file", file);
+
+        try {
+            const res = await fetch('http://localhost:8000/api/analyze-report', {
+                method: 'POST',
+                body: formData
+            });
+            if (!res.ok) {
+                throw new Error(`Server error: ${res.status}`);
+            }
+            const data = await res.json();
+            loading.style.display = 'none';
+            responseBox.style.display = 'block';
+            if (data.result) {
+                responseBox.innerHTML = `<b>${data.result}</b>`;
+            } else {
+                responseBox.innerHTML = "<b>No result.</b>";
+            }
+        } catch (err) {
+            loading.style.display = 'none';
+            responseBox.style.display = 'block';
+            responseBox.textContent = "Error: " + err.message;
+        }
+    });
+
+    // Remove or comment out this block in index.html
+    /* async function fetchTotalReports() {
+        try {
+            const response = await fetch(`report-analyzer.html?userEmail=${localStorage.getItem('userEmail')}`);
+            const reports = await response.json();
+            const totalReports = reports.length;
+            document.getElementById('total-reports').textContent = totalReports;
+        } catch (error) {
+            console.error('Error fetching total reports:', error);
+        }
+    }
+    fetchTotalReports(); */
+    </script>
+</body>
+</html>
