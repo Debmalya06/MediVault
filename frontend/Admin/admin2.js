@@ -39,7 +39,7 @@ document.getElementById("doctorForm2").addEventListener("submit", async function
     formData.append("image", document.getElementById("doctorImage").files[0]);
 
     try {
-        const response = await fetch("http://localhost:8081/api/doctors/add", {
+        const response = await fetch("https://medivault-r1do.onrender.com/api/doctors/add", {
             method: "POST",
             body: formData
         });
@@ -59,7 +59,7 @@ document.getElementById("doctorForm2").addEventListener("submit", async function
 
 async function fetchDoctors() {
     try {
-        const response = await fetch("http://localhost:8081/api/doctors/getdoctors");
+        const response = await fetch("https://medivault-r1do.onrender.com/api/doctors/getdoctors");
         const doctors = await response.json();
 
         const doctorTableBody = document.getElementById("doctorTableBody");
@@ -108,7 +108,7 @@ async function fetchDoctors() {
 // Fetch and display the list of doctors
 async function fetchDoctors() {
     try {
-        const response = await fetch("http://localhost:8081/api/doctors/getdoctors");
+        const response = await fetch("https://medivault-r1do.onrender.com/api/doctors/getdoctors");
         const doctors = await response.json();
 
         const doctorTableBody = document.querySelector(".doctor-list .data-table tbody");

@@ -153,7 +153,7 @@ uploadForm.addEventListener('submit', async (e) => {
     formData.append('userEmail', localStorage.getItem('userEmail')); // Retrieve user email from local storage
 
     try {
-        const response = await fetch('http://localhost:8081/api/reports/upload', {
+        const response = await fetch('https://medivault-r1do.onrender.com/api/reports/upload', {
             method: 'POST',
             body: formData
         });
@@ -174,7 +174,7 @@ uploadForm.addEventListener('submit', async (e) => {
 
 async function fetchReports() {
     try {
-        const response = await fetch(`http://localhost:8081/api/reports?userEmail=${localStorage.getItem('userEmail')}`);
+        const response = await fetch(`https://medivault-r1do.onrender.com/api/reports?userEmail=${localStorage.getItem('userEmail')}`);
         const reports = await response.json();
 
         const reportsTableBody = document.querySelector('.reports-table tbody');
@@ -227,7 +227,7 @@ document.addEventListener('click', async (e) => {
             const reportId = e.target.closest('.delete-btn').getAttribute('data-id');
 
             try {
-                const response = await fetch(`http://localhost:8081/api/reports/${reportId}`, {
+                const response = await fetch(`https://medivault-r1do.onrender.com/api/reports/${reportId}`, {
                     method: 'DELETE'
                 });
 
