@@ -231,7 +231,7 @@ document.addEventListener('DOMContentLoaded', function() {
 // Fetch and display doctors in the Appointment section
 async function fetchDoctors() {
     try {
-        const response = await fetch("https://medivault-r1do.onrender.com/api/doctors/getdoctors");
+        const response = await fetch("http://localhost:8081/api/doctors/getdoctors");
         if (!response.ok) {
             throw new Error(`Failed to fetch doctors. Status: ${response.status}`);
         }
@@ -324,7 +324,7 @@ document.addEventListener('DOMContentLoaded', function () {
         };
 
         try {
-            const response = await fetch('https://medivault-r1do.onrender.com/api/appointments/book', {
+            const response = await fetch('http://localhost:8081/api/appointments/book', {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json'
@@ -368,7 +368,7 @@ async function loadMyAppointments() {
     if (!email) return;
 
     try {
-        const response = await fetch(`https://medivault-r1do.onrender.com/api/appointments?email=${encodeURIComponent(email)}`);
+        const response = await fetch(`http://localhost:8081/api/appointments?email=${encodeURIComponent(email)}`);
         const appointments = await response.json();
 
         const appointmentsList = document.querySelector('.appointments-list');
