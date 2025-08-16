@@ -1,4 +1,4 @@
-FROM openjdk:21-jdk-alpine
+FROM openjdk:21-jdk
 VOLUME /tmp
 WORKDIR /app
 COPY target/AiMedical-*.jar app.jar
