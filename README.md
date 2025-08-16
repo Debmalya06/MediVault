@@ -39,9 +39,9 @@ MediVault/
 ## Getting Started
 
 ### Prerequisites
-- Node.js & npm (for frontend development)
+- HTML, CSS and JS(for frontend development)
 - Python 3.10+ (for AI and analysis services)
-- Java 17+ & Maven (for Spring Boot backend)
+- Java 21 & Maven (for Spring Boot backend)
 
 ### 1. Clone the Repository
 ```sh
