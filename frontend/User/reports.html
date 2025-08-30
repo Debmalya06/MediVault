@@ -12,6 +12,9 @@
     <!-- Header/Navigation Bar -->
     <header class="main-header">
         <div class="container">
+            <div class="logo">
+                <img src="logo.png" alt="MediVault Logo">
+            </div>
             <nav class="main-nav">
                 <ul class="nav-links">
                     <li><a href="index.html"><i class="fas fa-home"></i> Home</a></li>
@@ -31,6 +34,19 @@
                     </div>
                 </div>
             </nav>
+            <div class="mobile-menu-btn">
+                <i class="fas fa-bars"></i>
+            </div>
+        </div>
+        <div class="mobile-menu">
+            <ul>
+                <li><a href="index.html"><i class="fas fa-home"></i> Home</a></li>
+                <li class="active"><a href="reports.html"><i class="fas fa-file-medical"></i> Reports</a></li>
+                <li><a href="appointment.html"><i class="fas fa-calendar-check"></i> Appointment</a></li>
+                <li><a href="#"><i class="fas fa-user"></i> Profile</a></li>
+                <li><a href="#"><i class="fas fa-cog"></i> Settings</a></li>
+                <li><a href="#" id="logoutBtnMobile"><i class="fas fa-sign-out-alt"></i> Logout</a></li>
+            </ul>
         </div>
     </header>
 
@@ -189,12 +205,46 @@
             const username = localStorage.getItem('username') || 'User';
             document.getElementById('username').textContent = username;
 
+            // Mobile menu functionality
+            const mobileMenuBtn = document.querySelector('.mobile-menu-btn');
+            const mobileMenu = document.querySelector('.mobile-menu');
+
+            if (mobileMenuBtn && mobileMenu) {
+                mobileMenuBtn.addEventListener('click', function() {
+                    mobileMenu.classList.toggle('active');
+                    const icon = mobileMenuBtn.querySelector('i');
+                    icon.classList.toggle('fa-bars');
+                    icon.classList.toggle('fa-times');
+                });
+
+                // Close mobile menu when clicking on menu items
+                const mobileMenuLinks = document.querySelectorAll('.mobile-menu a');
+                mobileMenuLinks.forEach(link => {
+                    link.addEventListener('click', function() {
+                        mobileMenu.classList.remove('active');
+                        const icon = mobileMenuBtn.querySelector('i');
+                        icon.classList.remove('fa-times');
+                        icon.classList.add('fa-bars');
+                    });
+                });
+            }
+
             // Logout functionality
             document.getElementById('logoutBtn').addEventListener('click', function() {
                 localStorage.removeItem('username');
                 localStorage.removeItem('userEmail');
                 window.location.href = '../login.html';
             });
+
+            // Mobile logout functionality
+            const logoutBtnMobile = document.getElementById('logoutBtnMobile');
+            if (logoutBtnMobile) {
+                logoutBtnMobile.addEventListener('click', function() {
+                    localStorage.removeItem('username');
+                    localStorage.removeItem('userEmail');
+                    window.location.href = '../login.html';
+                });
+            }
         });
     </script>
 </body>

@@ -28,6 +28,8 @@
     --transition: all 0.3s ease;
 }
 
+
+
 body {
     font-family: 'Inter', sans-serif;
     line-height: 1.6;
@@ -52,8 +54,7 @@ ul {
 }
 
 img {
-    max-width: 100%;
-    height: auto;
+    height: 40px;
 }
 
 /* Button Styles */
@@ -111,10 +112,32 @@ img {
     z-index: 1000;
 }
 
-.main-nav {
+.main-header .container {
     display: flex;
     justify-content: space-between;
     align-items: center;
+}
+
+.logo {
+    display: flex;
+    align-items: center;
+}
+
+.logo img {
+    height: 40px;
+    margin-right: 10px;
+}
+
+.logo h1 {
+    font-size: 1.5rem;
+    font-weight: 700;
+    margin: 0;
+}
+
+.main-nav {
+    display: flex;
+    align-items: center;
+    gap: 30px;
 }
 
 .nav-links {
@@ -191,6 +214,71 @@ img {
 }
 
 .user-dropdown:hover .dropdown-content {
+    display: block;
+}
+
+/* Mobile Menu Styles */
+.mobile-menu-btn {
+    display: none;
+    background: none;
+    border: none;
+    color: var(--white);
+    font-size: 1.5rem;
+    cursor: pointer;
+    padding: 8px;
+    border-radius: var(--border-radius);
+    transition: var(--transition);
+}
+
+.mobile-menu-btn:hover {
+    background-color: rgba(255, 255, 255, 0.1);
+}
+
+.mobile-menu {
+    display: none;
+    position: absolute;
+    top: 100%;
+    left: 0;
+    right: 0;
+    background-color: var(--primary-color);
+    box-shadow: var(--shadow);
+    z-index: 999;
+}
+
+.mobile-menu ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.mobile-menu li {
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.mobile-menu li:last-child {
+    border-bottom: none;
+}
+
+.mobile-menu a {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 15px 20px;
+    color: var(--white);
+    text-decoration: none;
+    transition: var(--transition);
+}
+
+.mobile-menu a:hover {
+    background-color: rgba(255, 255, 255, 0.1);
+}
+
+.mobile-menu li.active a {
+    background-color: rgba(255, 255, 255, 0.2);
+    font-weight: 500;
+}
+
+.mobile-menu.active {
     display: block;
 }
 
@@ -698,6 +786,20 @@ footer {
 
 /* Responsive Styles */
 @media (max-width: 768px) {
+    .main-header .container {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+    }
+    
+    .main-nav {
+        display: none;
+    }
+    
+    .mobile-menu-btn {
+        display: block;
+    }
+    
     .dashboard-header {
         flex-direction: column;
         align-items: stretch;
